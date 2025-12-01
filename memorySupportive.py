@@ -250,6 +250,23 @@ if __name__ == "__main__":
                 print("Usage: 2 <difficulty> <round>")
                 return
             difficulty, round_number = args
+
+            # 🔹 NEW: print the correct sequence for the wizard
+            sequences = DIFFICULTY_SEQUENCES.get(difficulty)
+            if sequences is None:
+                print(f"No sequences defined for difficulty {difficulty}.")
+                return
+
+            index = round_number - 1
+            if index < 0 or index >= len(sequences):
+                print(f"Round {round_number} is not defined for difficulty {difficulty}.")
+                return
+
+            sequence = sequences[index]
+            print(f"Difficulty {difficulty}, round {round_number}")
+            print("Correct sequence:", ", ".join(sequence))
+
+            # Then actually play the round on Misty
             game.doRound(difficulty, round_number)
 
         elif cmd == 3:
@@ -279,7 +296,7 @@ if __name__ == "__main__":
     while True:
         print("\n=== Supportive Wizard Commands ===")
         print("1: Intro")
-        print("2: Play round — 2 <difficulty> <round>")
+        print("2: Play round — 2 <difficulty> <round> (also prints sequence)")
         print("3: Player correct")
         print("4: Player won")
         print("5: Player lost")
