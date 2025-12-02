@@ -233,8 +233,6 @@ class SupportiveMemoryGame:
         show_random_eyes(self.misty, NEUTRAL_EYES)
         self.misty.speak(random.choice(lines))
 
-    # ------------- NEW: SIMPLE ACKNOWLEDGEMENT -------------
-
     def acknowledge(self):
         lines = [
             "Cool!",
@@ -244,6 +242,11 @@ class SupportiveMemoryGame:
         ]
         show_random_eyes(self.misty, HAPPY_EYES)
         self.misty.speak(random.choice(lines))
+
+    def goodbye(self):
+        show_random_eyes(self.misty, NEUTRAL_EYES)
+        self.misty.speak("Okay! It was really fun playing with you. Have a wonderful rest of your day. Goodbye!")
+
 
 
 # -----------------------------
@@ -305,6 +308,10 @@ if __name__ == "__main__":
 
         elif cmd == 11:
             game.acknowledge()
+        
+        elif cmd == 00:
+            game.goodbye()
+
 
         else:
             print("Unknown command.")
@@ -321,7 +328,8 @@ if __name__ == "__main__":
         print("8: Didn't hear")
         print("9: Suggest water break")
         print("11: Simple acknowledgement (Cool / Great / Awesome)")
-        print("0: Quit")
+        print("00: Say goodbye")
+        print("0: EXIT WIZARD MODE")
 
         line = input("> ").strip()
         if not line:
