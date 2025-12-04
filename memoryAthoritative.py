@@ -5,7 +5,7 @@ import random
 ROBOT_IP = "192.168.1.237"
 
 # Delay after Misty speaks before starting LED sequence (seconds)
-TALK_DELAY = 6
+TALK_DELAY = 4.5
 
 # -----------------------------
 # COLOR HELPERS
@@ -27,7 +27,7 @@ def set_led(misty, color_name):
 
 def set_neutral_led(misty):
     """Sets LED to a neutral, authoritative color (Cyan) for standby."""
-    misty.change_led(0, 255, 255)
+    misty.change_led(255, 255, 255)
 
 def flash_sequence(misty, sequence, on_time=1.0, white_time=0.5):
     """
@@ -164,8 +164,9 @@ class AuthoritativeMemoryGame:
         set_neutral_led(self.misty)
         self.misty.speak(
             "Memory Assessment Protocol initiated. "
-            "I will display a color sequence. "
-            "You are required to memorize and repeat it. "
+            "I will display a color sequence with the light on my chest. "
+            "It will glow white inbetween each color."
+            "You are required to memorize and after the sequence is done repeat back to me. "
             "Prepare for the first trial."
         )
 
@@ -209,9 +210,9 @@ class AuthoritativeMemoryGame:
 
     def playAgainQuestion(self):
         lines = [
-            "Restart protocol?",
-            "Acknowledge to restart task.",
-            "Reset system for new trial?"
+            "Shall I proceed with a new game?",
+            "Acknowledge to start new task.",
+            "Should I reset system for a new game?"
         ]
         show_neutral_eyes(self.misty)
         self.misty.speak(random.choice(lines))
@@ -254,7 +255,7 @@ class AuthoritativeMemoryGame:
             "Acknowledged.",
             "Noted.",
             "Input received.",
-            "Proceed."
+            "Ok."
         ]
         show_neutral_eyes(self.misty)
         self.misty.speak(random.choice(lines))
